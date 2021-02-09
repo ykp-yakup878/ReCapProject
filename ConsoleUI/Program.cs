@@ -53,8 +53,8 @@ namespace ConsoleUI
 
             CarManager carManager1 = new CarManager(new EfCarDal());
             //ekleme
-            carManager1.Add(new Car { BrandId = 3, ColorId = 3, ModelYear = 2020, _Description = "B", DailyPrice = 1200000 });
-            carManager1.Add(new Car { BrandId = 4, ColorId = 5, ModelYear = 2017, _Description = "Tesla", DailyPrice = 750000 });
+            //carManager1.Add(new Car { BrandId = 3, ColorId = 3, ModelYear = 2020, _Description = "B", DailyPrice = 1200000 });
+            //carManager1.Add(new Car { BrandId = 4, ColorId = 5, ModelYear = 2017, _Description = "Tesla", DailyPrice = 750000 });
             carManager1.Add(new Car { BrandId = 5, ColorId = 4, ModelYear = 2018, _Description = "TOGG", DailyPrice = 250000 });
 
 
