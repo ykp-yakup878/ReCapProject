@@ -25,37 +25,37 @@ namespace ConsoleUI
                 Console.WriteLine("-----------------------");
             }
 
-            //Console.WriteLine("///////////////////////////////////////");
+            Console.WriteLine("///////////////////////////////////////");
             //markaya göre filtreleme
-            //foreach (var car in carManager.GetCarsByBrandId(2))
-            //{
-            //    Console.WriteLine("Id : " + car.CarId);
-            //    Console.WriteLine("Marka Id : " + car.BrandId);
-            //    Console.WriteLine("Renk Id : " + car.ColorId);
-            //    Console.WriteLine("Model(Yıl) : " + car.ModelYear);
-            //    Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
-            //    Console.WriteLine("Açıklama : " + car._Description);
-            //    Console.WriteLine("-----------------------");
-            //}
+            foreach (var car in carManager.GetCarsByBrandId(2))
+            {
+                Console.WriteLine("Id : " + car.CarId);
+                Console.WriteLine("Marka Id : " + car.BrandId);
+                Console.WriteLine("Renk Id : " + car.ColorId);
+                Console.WriteLine("Model(Yıl) : " + car.ModelYear);
+                Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
+                Console.WriteLine("Açıklama : " + car._Description);
+                Console.WriteLine("-----------------------");
+            }
 
-            //Console.WriteLine("///////////////////////////////////////");
-            //renge göre filtreleme
-            //foreach (var car in carManager.GetCarsByColorId(1))
-            //{
-            //    Console.WriteLine("Id : " + car.CarId);
-            //    Console.WriteLine("Marka Id : " + car.BrandId);
-            //    Console.WriteLine("Renk Id : " + car.ColorId);
-            //    Console.WriteLine("Model(Yıl) : " + car.ModelYear);
-            //    Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
-            //    Console.WriteLine("Açıklama : " + car._Description);
-            //    Console.WriteLine("-----------------------");
-            //}
+            Console.WriteLine("///////////////////////////////////////");
+           //renge göre filtreleme
+            foreach (var car in carManager.GetCarsByColorId(1))
+            {
+                Console.WriteLine("Id : " + car.CarId);
+                Console.WriteLine("Marka Id : " + car.BrandId);
+                Console.WriteLine("Renk Id : " + car.ColorId);
+                Console.WriteLine("Model(Yıl) : " + car.ModelYear);
+                Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
+                Console.WriteLine("Açıklama : " + car._Description);
+                Console.WriteLine("-----------------------");
+            }
 
             CarManager carManager1 = new CarManager(new EfCarDal());
             //ekleme
-            //carManager1.Add(new Car {BrandId=3,ColorId=3,ModelYear=2020,_Description="BMW",DailyPrice=1200000 });
-            //carManager1.Add(new Car {BrandId=4,ColorId=5,ModelYear=2017,_Description="Tesla",DailyPrice=750000 });
-           // carManager1.Add(new Car {BrandId=5,ColorId=4,ModelYear=2018,_Description="TOGG",DailyPrice=250000 });
+            carManager1.Add(new Car { BrandId = 3, ColorId = 3, ModelYear = 2020, _Description = "B", DailyPrice = 1200000 });
+            carManager1.Add(new Car { BrandId = 4, ColorId = 5, ModelYear = 2017, _Description = "Tesla", DailyPrice = 750000 });
+            carManager1.Add(new Car { BrandId = 5, ColorId = 4, ModelYear = 2018, _Description = "TOGG", DailyPrice = 250000 });
 
 
 
