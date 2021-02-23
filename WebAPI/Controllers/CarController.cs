@@ -51,5 +51,10 @@ namespace WebAPI.Controllers
         {
                 return Ok(_carService.Update(car));
         }
+        [HttpGet("cardetail")]
+        public IActionResult CarDetail()
+        {
+            return Ok(_carService.GetCarDetail());
+        }
     }
 }
