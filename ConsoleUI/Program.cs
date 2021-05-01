@@ -76,15 +76,15 @@ namespace ConsoleUI
             //userManager.Delete(userManager.GetById(3));
             //userManager.Update(new User {Id=1, FirstName = "Celil", LastName = "Güz", Email = "celil@mail.com", _Password = "123456"});
             //Console.WriteLine(userManager.GetById(2).FirstName);
-            foreach (var user in userManager.GetAll())
-            {
-                Console.WriteLine(user.Id);
-                Console.WriteLine(user.FirstName);
-                Console.WriteLine(user.LastName);
-                Console.WriteLine(user.Email);
-                Console.WriteLine(user._Password);
-                Console.WriteLine("////////");
-            }
+            //foreach (var user in userManager.GetAll())
+            //{
+            //    Console.WriteLine(user.Id);
+            //    Console.WriteLine(user.FirstName);
+            //    Console.WriteLine(user.LastName);
+            //    Console.WriteLine(user.Email);
+            //    //Console.WriteLine(user._Password);
+            //    Console.WriteLine("////////");
+            //}
         }
 
         private static void CarTest(CarManager carManager)

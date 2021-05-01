@@ -1,15 +1,15 @@
-﻿using Business.Abstract;
-using DataAccess.Abstract;
-using Entities.Concrete;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.Abstract;
+using Core.Entities.Concrete;
+using DataAccess.Abstract;
 
 namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
-        IUserDal _userDal;
+        private IUserDal _userDal;
 
         public UserManager(IUserDal userDal)
         {
@@ -21,24 +21,14 @@ namespace Business.Concrete
             _userDal.Add(user);
         }
 
-        public void Delete(User user)
+        public User GetByMail(string email)
         {
-            _userDal.Delete(user);
+            return _userDal.Get(u => u.Email == email);
         }
 
-        public List<User> GetAll()
+        public List<OperationClaim> getClaims(User user)
         {
-            return _userDal.GetAll();
-        }
-
-        public User GetById(int id)
-        {
-            return _userDal.Get(p=>p.Id==id);
-        }
-
-        public void Update(User user)
-        {
-            _userDal.Update(user);
+            return _userDal.getClaims(user);
         }
     }
 }
