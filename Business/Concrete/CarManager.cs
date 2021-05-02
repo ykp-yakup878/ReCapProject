@@ -12,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofac.Cache;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 
 namespace Business.Concrete
 {
@@ -24,8 +27,10 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [TransactionScopeAspect]
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             ValidationTool.Validate(new CarValidator(), car);
@@ -40,6 +45,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 2)
@@ -49,21 +55,25 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.ProductListed);
         }
 
+        [PerformanceAspect(5)]
         public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(p => p.CarId == id), id + " Numaralı " + Messages.CarShow);
         }
 
+        [PerformanceAspect(5)]
         public IDataResult<List<CarDetailDto>> GetCarDetail()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarDetailList);
         }
 
+        [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
+        [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));

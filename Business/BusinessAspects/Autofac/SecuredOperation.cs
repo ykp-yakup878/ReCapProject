@@ -5,6 +5,7 @@ using Business.Constants;
 using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.Utilities;
+using Core.Utilities.Interceptors;
 using Core.Utilities.IoC;
 using Core.Utilities.Results;
 using Microsoft.AspNetCore.Http;

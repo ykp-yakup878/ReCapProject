@@ -9,6 +9,7 @@ using DataAccess.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 
 namespace Business.DependencyResolvers.Autofac

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CrossCuttingConcerns\Caching\Redis\" />
     <Folder Include="Utilities\Security\Hashing\" />
   </ItemGroup>
 
