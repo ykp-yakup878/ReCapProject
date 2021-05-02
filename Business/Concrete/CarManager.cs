@@ -45,6 +45,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [CacheAspect]
         [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
         {
