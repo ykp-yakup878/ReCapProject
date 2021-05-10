@@ -27,12 +27,36 @@ namespace DataAccess.Concrete.EntityFramework
                              { CarId = c.CarId, 
                                  BrandName = b.BrandName, 
                                  DailyPrice = c.DailyPrice, 
-                                 _Description = c._Description,
-                                 ColorName=cl.ColorName 
+                                 CarName = c._Description,
+                                 ColorName=cl.ColorName,
+                                 ModelYear = c.ModelYear
                              };
                 return result.ToList();
             }
                       
+        }
+        public List<CarDetailDto> GetCarsByBrand(int id)
+        {
+            using (ReCapProjectContext context = new ReCapProjectContext())
+            {
+
+                var result = from c in context.Cars
+                    where c.BrandId==id
+                    join b in context.Brands 
+                        on c.BrandId equals b.BrandId
+                    join cl in context.Colors
+                        on c.ColorId equals cl.ColorId
+                    select new CarDetailDto
+                    {
+                        CarId = c.CarId,
+                        BrandName = b.BrandName,
+                        DailyPrice = c.DailyPrice,
+                        CarName = c._Description,
+                        ColorName = cl.ColorName,
+                        ModelYear = c.ModelYear
+                    };
+                return result.ToList();
+            }
         }
     }
 }

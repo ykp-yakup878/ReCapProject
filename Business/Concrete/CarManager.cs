@@ -69,9 +69,9 @@ namespace Business.Concrete
         }
 
         [PerformanceAspect(5)]
-        public IDataResult<List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsByBrand(id));
         }
 
         [PerformanceAspect(5)]
