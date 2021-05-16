@@ -30,5 +30,12 @@ namespace Business.Constants
         public static string BrandDeleted="Kategori Silindi";
         public static string BrandAdded="Kategori Eklendi";
         public static string BrandUpdated="Kategori Güncellendi";
+        public static string AddedColor="Eklendi";
+        public static string ColorsListed="Renkler Listelendi";
+        public static string DeletedColor="Silindi";
+        public static string ColorUpdated="Güncellendi";
+        public static string RentalListed="Kiralar Listelendi";
+        public static string DeleteRental="Kira Silindi";
+        public static string RentalUpdated="Kira Güncellendi";
     }
 }

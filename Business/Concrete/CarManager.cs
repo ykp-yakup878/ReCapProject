@@ -21,10 +21,12 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
+        private ICarImageService _carImageService;
 
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal, ICarImageService carImageService)
         {
             _carDal = carDal;
+            _carImageService = carImageService;
         }
 
         [TransactionScopeAspect]
@@ -35,6 +37,7 @@ namespace Business.Concrete
         {
             ValidationTool.Validate(new CarValidator(), car);
             _carDal.Add(car);
+            _carImageService.CarAddImageDefault(car.CarId);
             return new SuccessResult(Messages.CarAdded + " " + car._Description);
         }
 
@@ -67,17 +70,21 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarDetailList);
         }
-
-        [PerformanceAspect(5)]
-        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int id)
+        public IDataResult<List<CarImageDetailDto>> GetCarImageDetail(int carId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsByBrand(id));
+            return new SuccessDataResult<List<CarImageDetailDto>>(_carDal.GetCarImageDetail(carId));
         }
 
         [PerformanceAspect(5)]
-        public IDataResult<List<Car>> GetCarsByColorId(int id)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsByBrand(brandId));
+        }
+
+        [PerformanceAspect(5)]
+        public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsByColor(colorId));
         }
 
         public IResult Update(Car car)
@@ -85,5 +92,7 @@ namespace Business.Concrete
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated + " " + car._Description);
         }
+
+        //BusinessRules
     }
 }

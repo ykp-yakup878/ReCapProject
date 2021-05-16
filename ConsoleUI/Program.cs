@@ -13,7 +13,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal());//new InMemoryCarDal());
+            //CarManager carManager = new CarManager(new EfCarDal());//new InMemoryCarDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             UserManager userManager = new UserManager(new EfUserDal());
@@ -46,14 +46,14 @@ namespace ConsoleUI
         private static void RentalTest(RentalManager rentalManager)
         {
             //rentalManager.Add(new Rental {CarId=2,CustomerId=2,RentDate=new DateTime(2021,2,16),ReturnDate= new DateTime(2021, 2, 20) });
-            foreach (var rental in rentalManager.GetAll())
-            {
-                Console.WriteLine(rental.Id);
-                Console.WriteLine(rental.CarId);
-                Console.WriteLine(rental.CustomerId);
-                Console.WriteLine(rental.RentDate);
-                Console.WriteLine(rental.ReturnDate);
-            }
+            //foreach (var rental in rentalManager.GetAll())
+            //{
+            //    Console.WriteLine(rental.Id);
+            //    Console.WriteLine(rental.CarId);
+            //    Console.WriteLine(rental.CustomerId);
+            //    Console.WriteLine(rental.RentDate);
+            //    Console.WriteLine(rental.ReturnDate);
+            //}
         }
 
         private static void CustomerCrud(CustomerManager customerManager)
@@ -62,12 +62,12 @@ namespace ConsoleUI
             //customerManager.Delete(customerManager.GetById(2));
             //customerManager.Update(new Customer {Id=1, UserId=1,CompanyName="XYZ Şirket"});
             //Console.WriteLine(customerManager.GetById(1).CompanyName);
-            foreach (var customer in customerManager.GetAll())
-            {
-                Console.WriteLine(customer.Id);
-                Console.WriteLine(customer.UserId);
-                Console.WriteLine(customer.CompanyName);
-            }
+            //foreach (var customer in customerManager.GetAll())
+            //{
+            //    Console.WriteLine(customer.Id);
+            //    Console.WriteLine(customer.UserId);
+            //    Console.WriteLine(customer.CompanyName);
+            //}
         }
 
         private static void UserCrud(UserManager userManager)
@@ -98,7 +98,7 @@ namespace ConsoleUI
                 Console.WriteLine("Renk Id : " + item.ColorName);
                 //Console.WriteLine("Model(Yıl) : " + item.ModelYear);
                 Console.WriteLine("GünlükFiyat : " + item.DailyPrice);
-                Console.WriteLine("Açıklama : " + item._Description);
+                //Console.WriteLine("Açıklama : " + item._Description);
                 Console.WriteLine("-----------------------");
             }
             //carManager.Update(new Car { CarId = 2003, BrandId = 1005, ColorId = 2, DailyPrice = 750, ModelYear = 2018, _Description = "Reanult F" });
@@ -107,14 +107,14 @@ namespace ConsoleUI
 
         private static void ColorCrud(ColorManager colorManager)
         {
-            foreach (var item in colorManager.GetAll())
-            {
-                Console.WriteLine(item.ColorName);
-            }
+            //foreach (var item in colorManager.GetAll())
+            //{
+            //    Console.WriteLine(item.ColorName);
+            //}
 
             colorManager.Add(new Color { ColorName = "Purple" });
             colorManager.Update(new Color { ColorId = 2002, ColorName = "Brown" });
-            colorManager.Delete(colorManager.GetById(2002));
+            //colorManager.Delete(colorManager.GetById(2002));
         }
 
         private static void CarBrandFilterTest(CarManager carManager)
@@ -124,11 +124,11 @@ namespace ConsoleUI
             foreach (var car in carManager.GetCarsByBrandId(2).Data)
             {
                 Console.WriteLine("Id : " + car.CarId);
-                Console.WriteLine("Marka Id : " + car.BrandId);
-                Console.WriteLine("Renk Id : " + car.ColorId);
-                Console.WriteLine("Model(Yıl) : " + car.ModelYear);
-                Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
-                Console.WriteLine("Açıklama : " + car._Description);
+                //Console.WriteLine("Marka Id : " + car.BrandId);
+                //Console.WriteLine("Renk Id : " + car.ColorId);
+                //Console.WriteLine("Model(Yıl) : " + car.ModelYear);
+                //Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
+                //Console.WriteLine("Açıklama : " + car._Description);
                 Console.WriteLine("-----------------------");
             }
         }
@@ -139,22 +139,22 @@ namespace ConsoleUI
             foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine("Id : " + car.CarId);
-                Console.WriteLine("Marka Id : " + car.BrandId);
-                Console.WriteLine("Renk Id : " + car.ColorId);
-                Console.WriteLine("Model(Yıl) : " + car.ModelYear);
-                Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
-                Console.WriteLine("Açıklama : " + car._Description);
+                //Console.WriteLine("Marka Id : " + car.BrandId);
+                //Console.WriteLine("Renk Id : " + car.ColorId);
+                //Console.WriteLine("Model(Yıl) : " + car.ModelYear);
+                //Console.WriteLine("GünlükFiyat : " + car.DailyPrice);
+                //Console.WriteLine("Açıklama : " + car._Description);
                 Console.WriteLine("-----------------------");
             }
         }
 
         private static void CarAddTest()
         {
-            CarManager carManager1 = new CarManager(new EfCarDal());
+            //CarManager carManager1 = new CarManager(new EfCarDal());
             //ekleme
-            carManager1.Add(new Car { BrandId = 3, ColorId = 3, ModelYear = 2020, _Description = "B", DailyPrice = 1200000 });
-            carManager1.Add(new Car { BrandId = 4, ColorId = 5, ModelYear = 2017, _Description = "Tesla", DailyPrice = 750000 });
-            carManager1.Add(new Car { BrandId = 1005, ColorId = 2, ModelYear = 2018, _Description = "Renault", DailyPrice = 1000 });
+            //carManager1.Add(new Car { BrandId = 3, ColorId = 3, ModelYear = 2020, _Description = "B", DailyPrice = 1200000 });
+            //carManager1.Add(new Car { BrandId = 4, ColorId = 5, ModelYear = 2017, _Description = "Tesla", DailyPrice = 750000 });
+            //carManager1.Add(new Car { BrandId = 1005, ColorId = 2, ModelYear = 2018, _Description = "Renault", DailyPrice = 1000 });
         }
 
         private static void LinqTest(CarManager carManager)

@@ -10,26 +10,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
         ICarImageDal _carImageDal;
+        private ICarService _carService;
 
         public CarImageManager(ICarImageDal carImageDal)
         {
             _carImageDal = carImageDal;
+            
         }
+
 
         public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimitedExceded(carImage.CarId));
-            if (result!=null)
+            if (result != null)
             {
                 return result;
             }
-            carImage.ImagePath = FileHelper.Add(file);
+
+            var imageResult=FileHelper.Upload(file);
+            carImage.ImagePath = imageResult.Message;
+            carImage._Date = DateTime.Now;
+            _carImageDal.Add(carImage);
+            return new SuccessResult(Messages.CarImageAdded);
+        }
+
+        public IResult CarAddImageDefault(int carId)
+        {
+            CarImage carImage = new CarImage();
+            carImage.ImagePath = @"D:\Visual Studio Uygulamalar\Kamp\ReCapProject\WebAPI\wwwroot\Uploads\logo.jpg";
+            carImage.CarId = carId;
             carImage._Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
@@ -50,13 +66,14 @@ namespace Business.Concrete
 
         public IDataResult<List<CarImage>> GetAll()
         {
+            
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
         public IDataResult<List<CarImage>> GetImagesByCarId(int id)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageNull(id));
-            if (result !=null)
+            if (result != null)
             {
                 return new ErrorDataResult<List<CarImage>>(result.Message);
             }
@@ -65,7 +82,9 @@ namespace Business.Concrete
 
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
+            var isImage = _carImageDal.Get(c => c.Id == carImage.Id);
+            var updatedFile=FileHelper.Update(file,isImage.ImagePath);
+            carImage.ImagePath = updatedFile.Message; 
             carImage._Date = DateTime.Now;
             _carImageDal.Update(carImage);
             return new SuccessResult();
@@ -76,7 +95,7 @@ namespace Business.Concrete
         {
             try
             {
-                string path = @"\wwwroot\Uploads\logo.jpg";
+                string path = @"D:\Visual Studio Uygulamalar\Kamp\ReCapProject\WebAPI\wwwroot\Uploads\logo.jpg";
                 var result = _carImageDal.GetAll(c => c.CarId == id).Any();
                 if (!result)
                 {
@@ -92,10 +111,11 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == id));
         }
+        
         private IResult CheckIfImageLimitedExceded(int carId)
         {
             var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
-            if (result>=5)
+            if (result >= 5)
             {
                 return new ErrorResult(Messages.CarImageLimitExceded);
             }

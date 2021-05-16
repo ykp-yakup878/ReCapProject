@@ -73,6 +73,21 @@ namespace DataAccess.Concrete
             throw new NotImplementedException();
         }
 
+        public List<CarDetailDto> GetCarsByColor(int colorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarImageDetailDto> GetCarImageDetail(int carId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetDetails(int colorId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
             Car carUpdate;
