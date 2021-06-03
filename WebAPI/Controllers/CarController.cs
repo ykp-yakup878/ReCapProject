@@ -35,7 +35,13 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Car car)
         {
-            return Ok(_carService.Add(car));
+            var result = _carService.Add(car);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
         [HttpPost("delete")]
         public IActionResult Delete(Car car)
@@ -50,7 +56,12 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public IActionResult Update(Car car)
         {
-                return Ok(_carService.Update(car));
+            var result = _carService.Update(car);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpGet("cardetail")]
         public IActionResult CarDetail()
@@ -75,6 +86,17 @@ namespace WebAPI.Controllers
         public IActionResult GetCarsByColor(int colorId)
         {
             var result = _carService.GetCarsByColorId(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        [HttpGet("getcarsfilter")]
+        public IActionResult GetCarsFilter(int brandId,int colorId)
+        {
+            var result = _carService.GetCarFilter(brandId,colorId);
             if (result.Success)
             {
                 return Ok(result);

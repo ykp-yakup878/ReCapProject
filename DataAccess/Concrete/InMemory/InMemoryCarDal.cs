@@ -78,6 +78,11 @@ namespace DataAccess.Concrete
             throw new NotImplementedException();
         }
 
+        public List<CarDetailDto> GetCarsFilter(int brandId, int colorId)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<CarImageDetailDto> GetCarImageDetail(int carId)
         {
             throw new NotImplementedException();

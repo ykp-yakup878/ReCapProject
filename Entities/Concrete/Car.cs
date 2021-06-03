@@ -13,5 +13,6 @@ namespace Entities.Concrete
         public int ModelYear { get; set; }
         public decimal DailyPrice { get; set; }
         public string _Description { get; set; }
+        public int MinFindeksScore { get; set; }
     }
 }

@@ -70,6 +70,14 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarDetailList);
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarFilter(int brandId, int colorId)
+        {
+            var result = _carDal.GetCarsFilter(brandId, colorId);
+
+            return new SuccessDataResult<List<CarDetailDto>>(result);
+        }
+
         public IDataResult<List<CarImageDetailDto>> GetCarImageDetail(int carId)
         {
             return new SuccessDataResult<List<CarImageDetailDto>>(_carDal.GetCarImageDetail(carId));
@@ -87,6 +95,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsByColor(colorId));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
             _carDal.Update(car);

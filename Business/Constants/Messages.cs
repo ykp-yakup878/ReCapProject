@@ -37,5 +37,8 @@ namespace Business.Constants
         public static string RentalListed="Kiralar Listelendi";
         public static string DeleteRental="Kira Silindi";
         public static string RentalUpdated="Kira Güncellendi";
+        public static string CannotBeRented="Bu Araç Kiralanmış";
+        public static string NoSuchCard = "Böyle Bir Kart Yok!";
+        public static string InsufficientCredit="Yetersiz Kredi!!";
     }
 }

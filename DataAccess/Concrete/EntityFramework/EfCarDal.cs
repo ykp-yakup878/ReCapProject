@@ -14,6 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
 
     public class EfCarDal : EfEntityRepositoryBase<Car, ReCapProjectContext>, ICarDal
     {
+
         public List<CarDetailDto> GetCarDetails()
         {
             using (ReCapProjectContext context=new ReCapProjectContext())
@@ -77,6 +78,27 @@ namespace DataAccess.Concrete.EntityFramework
                         DailyPrice = c.DailyPrice,
                         CarName = c._Description,
                         ColorName = cl.ColorName,
+                        ModelYear = c.ModelYear
+                    };
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarsFilter(int brandId, int colorId)
+        {
+            using (ReCapProjectContext context=new ReCapProjectContext())
+            {
+                var result = from c in context.Cars
+                    where c.BrandId == brandId && c.ColorId == colorId
+                    join b in context.Brands on c.BrandId equals b.BrandId
+                    join co in context.Colors on c.ColorId equals co.ColorId
+                    select new CarDetailDto
+                    {
+                        CarId = c.CarId,
+                        BrandName = b.BrandName,
+                        ColorName = co.ColorName,
+                        CarName = c._Description,
+                        DailyPrice = c.DailyPrice,
                         ModelYear = c.ModelYear
                     };
                 return result.ToList();

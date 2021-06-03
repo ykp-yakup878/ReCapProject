@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Entities.Concrete;
 
 namespace WebAPI.Controllers
 {
@@ -17,6 +18,17 @@ namespace WebAPI.Controllers
         public RentalController(IRentalService rentalService)
         {
             _rentalService = rentalService;
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Rental rental,int day,int paymentId)
+        {
+            var result = _rentalService.Add(rental, day,paymentId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getall")]
