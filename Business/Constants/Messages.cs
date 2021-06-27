@@ -40,5 +40,6 @@ namespace Business.Constants
         public static string CannotBeRented="Bu Araç Kiralanmış";
         public static string NoSuchCard = "Böyle Bir Kart Yok!";
         public static string InsufficientCredit="Yetersiz Kredi!!";
+        public static string UserAdded="Kullanıcı Eklendi";
     }
 }

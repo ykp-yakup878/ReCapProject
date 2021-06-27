@@ -27,13 +27,14 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental, int day, int paymentId)
         {
+            rental.ReturnDate = rental.RentDate.AddDays(day);
             var result = BusinessRules.Run(IsRentable(rental),
                 Payment(paymentId, rental.CarId));
             if (result != null)
             {
                 return new ErrorResult(result.Message);
             }
-            rental.ReturnDate = rental.RentDate.AddDays(day);
+
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
@@ -68,12 +69,24 @@ namespace Business.Concrete
         //Business Ruless
         public IResult IsRentable(Rental rental)
         {
-            var result = _rentalDal.Get(r => r.CarId == rental.CarId && r.ReturnDate > DateTime.Now);
-            if (result == null || result.ReturnDate < DateTime.Now)
+            var results = _rentalDal.GetAll(r => r.CarId == rental.CarId && rental.ReturnDate > DateTime.Now);
+
+            foreach (var result in results)
             {
-                return new SuccessResult();
+                if (result == null || result.ReturnDate > DateTime.Now)
+                {
+                    if (result.ReturnDate < DateTime.Now)
+                    {
+                        return new SuccessResult();
+                    }
+                    else
+                    {
+                        var rDate = result.ReturnDate.Value.ToLongDateString();
+                        return new ErrorResult(Messages.CannotBeRented + " " + rDate + " " + "Tarihinden sonra kiralama mevcut olur");
+                    }
+                }
             }
-            return new ErrorResult(Messages.CannotBeRented);
+            return new SuccessResult();
         }
         public IResult Payment(int paymentId, int carId)
         {
@@ -83,7 +96,7 @@ namespace Business.Concrete
             {
                 return new SuccessResult();
             }
-            return new ErrorResult(Messages.InsufficientCredit+" "+"Krediniz:"+" "+payment.Data.MoneyInTheCard);
+            return new ErrorResult(Messages.InsufficientCredit + " " + "Krediniz:" + " " + payment.Data.MoneyInTheCard);
         }
 
     }
