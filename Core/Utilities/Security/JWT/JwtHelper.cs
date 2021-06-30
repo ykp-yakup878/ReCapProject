@@ -20,7 +20,6 @@ namespace Core.Utilities.Security.JWT
         {
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-            _accessTokenExpiration=DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
         }
 
         
@@ -45,7 +44,7 @@ namespace Core.Utilities.Security.JWT
             var jwt = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer,
                 audience: tokenOptions.Audience,
-                expires: _accessTokenExpiration,
+                expires: _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration),
                 notBefore: DateTime.Now,
                 claims: setClaims(user, operationClaims),
                 signingCredentials:signingCredentials
